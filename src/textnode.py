@@ -8,6 +8,8 @@ class TextType(Enum):
     CODE = "code"
     LINK = "link"
     IMAGE = "image"
+    UNORDERED_LIST = "unordered_list"
+    ORDERED_LIST = "ordered_list"
 
 class TextNode():
     def __init__(self, text, text_type, url=None):
@@ -38,4 +40,6 @@ def text_node_to_html_node(text_node):
         return LeafNode("a", text_node.text, props={"href": text_node.url})
     if text_node.text_type == TextType.IMAGE:
         return LeafNode("img", "", props={"src": text_node.url, "alt": text_node.text})
+    if text_node.text_type == TextType.UNORDERED_LIST or TextType.ORDERED_LIST:
+        return LeafNode("li", text_node.text)
     raise ValueError(f"Unknown text type: {text_node.text_type}")
