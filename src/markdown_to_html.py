@@ -3,6 +3,7 @@ from splitnodes import markdown_to_blocks, text_to_textnodes
 from htmlnode import HTMLNode, LeafNode, ParentNode
 from textnode import TextNode, text_node_to_html_node
 import textwrap
+import re
 
 def text_to_children(text):
     text_nodes = text_to_textnodes(text)
@@ -53,6 +54,12 @@ def markdown_to_html_node(markdown):
     return ParentNode("div", node_list)
 
 
-
-
+def extract_title(markdown):
+    title = re.search(r"\n# (.*)", markdown)
+    if title:
+        text = title.group(1)
+        print(f"Extracted title: {text}")
+        return text
+    else:
+        raise ValueError("Markdown must start with a heading") 
 

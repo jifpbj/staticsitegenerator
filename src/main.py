@@ -1,8 +1,7 @@
 from textnode import TextNode, TextType
+from copy_contents import copy_content
 
 def main():
-    node = TextNode("anchor text", TextType.LINK, "https://example.com")
-    print(node)
-
+    copy_content()
 main()
 
